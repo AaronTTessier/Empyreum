@@ -33,9 +33,6 @@ namespace Empyreum
             this.viewModel = new MainWindowViewModel();
             viewModel.SearchedItems = new ObservableCollection<Item>();
             viewModel.OwnedItems = new ObservableCollection<Item>();
-
-
-            this.DataContext = viewModel;
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
