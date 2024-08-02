@@ -18,6 +18,7 @@ using Empyreum.Models;
 using Empyreum.ViewModel;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
+using Empyreum.Data;
 
 namespace Empyreum
 {
@@ -32,7 +33,9 @@ namespace Empyreum
             InitializeComponent();
             this.viewModel = new MainWindowViewModel();
             viewModel.SearchedItems = new ObservableCollection<Item>();
-            viewModel.OwnedItems = new ObservableCollection<Item>();
+            viewModel.OwnedItems = new ObservableCollection<Item>(ItemData.GetItems());
+
+            this.DataContext = viewModel;
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
@@ -50,6 +53,7 @@ namespace Empyreum
 
             this.viewModel.SearchedItems.Remove(selectedItem);
             this.viewModel.OwnedItems.Add(selectedItem);
+            ItemData.AddItemToDb(selectedItem);
         }
 
         private void removeBtn_OnClick(object sender, RoutedEventArgs e)
@@ -67,6 +71,7 @@ namespace Empyreum
 
             this.viewModel.OwnedItems.Remove(selectedItem);
             this.viewModel.SearchedItems.Add(selectedItem);
+            ItemData.RemoveItemFromDb(selectedItem);
         }
 
         private async void searchTextBox_KeyDown(object sender, KeyEventArgs e)
