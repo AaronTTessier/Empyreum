@@ -59,6 +59,10 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Character Search">
+                
+            </TabItem>
         </TabControl>
         <Label Name="devLabel" Content="Aaron Tessier, 2024 - Full Sail University: Wearable Computing" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="25"/>
     </Grid>
