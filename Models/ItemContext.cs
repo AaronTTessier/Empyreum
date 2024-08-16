@@ -18,5 +18,15 @@ namespace Empyreum.Models
             optionsBuilder.UseSqlite($"Data Source = {liteConn}");
             base.OnConfiguring(optionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Character>()
+                .HasMany(e => e.CharItems)
+                .WithOne(e => e.Character)
+                .HasForeignKey(e => e.CharID)
+                .IsRequired(false);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

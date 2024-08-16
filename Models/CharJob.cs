@@ -1,0 +1,37 @@
+﻿namespace Empyreum.Models
+{
+    public enum CharJob
+    {
+        Gladiator,
+        Marauder,
+        Lancer,
+        Pugilist,
+        Archer,
+        Thaumaturge,
+        Arcaninst,
+        Conjurer,
+        Rogue,
+        Paladin,
+        Warrior,
+        Dragoon,
+        Monk,
+        Bard,
+        BlackMage,
+        Summoner,
+        Scholar,
+        WhiteMage,
+        Ninja,
+        DarkKnight,
+        Machinist,
+        Astrologian,
+        Samurai,
+        RedMage,
+        Gunbreaker,
+        Dancer,
+        Reaper,
+        Sage,
+        Viper,
+        Pictomancer,
+        BlueMage
+    }
+}

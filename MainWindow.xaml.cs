@@ -36,6 +36,7 @@ namespace Empyreum
             viewModel.OwnedItems = new ObservableCollection<Item>(ItemData.GetItems());
 
             this.DataContext = viewModel;
+            
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
