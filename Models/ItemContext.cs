@@ -11,6 +11,8 @@ namespace Empyreum.Models
     {
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<Character> Characters { get; set; }
+
         public string liteConn = @"Item.db";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -26,6 +28,8 @@ namespace Empyreum.Models
                 .WithOne(e => e.Character)
                 .HasForeignKey(e => e.CharID)
                 .IsRequired(false);
+            modelBuilder.Entity<Item>()
+                .HasKey(e => e.ItemServerId);
             base.OnModelCreating(modelBuilder);
         }
     }

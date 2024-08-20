@@ -10,7 +10,11 @@ namespace Empyreum.ViewModel
 
         public ObservableCollection<Item> SearchedItems { get; set; }
 
+        public ObservableCollection<Character> characters { get; set; }
+
         public Item SelectedItem { get; set; }
+
+        public Character SelectedChar { get; set; }
 
         public MainWindowViewModel()
         {

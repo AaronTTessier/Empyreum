@@ -30,6 +30,6 @@ namespace Empyreum.Models
 
         public string LogicalDCName { get; set; }
 
-        public ICollection<Item> CharItems { get; } = new List<Item>();
+        public ICollection<Item> CharItems { get; set; } = new List<Item>();
     }
 }

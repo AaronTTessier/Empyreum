@@ -3,6 +3,7 @@ using System;
 using Empyreum.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Empyreum.Migrations
 {
     [DbContext(typeof(ItemContext))]
-    partial class ItemContextModelSnapshot : ModelSnapshot
+    [Migration("20240819190549_RefreshChar")]
+    partial class RefreshChar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
@@ -66,7 +69,7 @@ namespace Empyreum.Migrations
 
             modelBuilder.Entity("Empyreum.Models.Item", b =>
                 {
-                    b.Property<int>("ItemServerId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -77,18 +80,18 @@ namespace Empyreum.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ID")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Icon")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("ItemServerId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ItemServerId");
+                    b.HasKey("ID");
 
                     b.HasIndex("CharID");
 

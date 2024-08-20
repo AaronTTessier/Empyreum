@@ -34,9 +34,31 @@ namespace Empyreum
             this.viewModel = new MainWindowViewModel();
             viewModel.SearchedItems = new ObservableCollection<Item>();
             viewModel.OwnedItems = new ObservableCollection<Item>(ItemData.GetItems());
+            viewModel.characters = new ObservableCollection<Character>(CharacterData.GetCharacters());
 
             this.DataContext = viewModel;
-            
+            //Character DUMMY = new Character()
+            //{
+            //    FirstName = "ABC",
+            //    LastName = "TEST",
+            //    Race = "Hrothgar",
+            //    Clan = "The Lost",
+            //    Gender = CharGender.Female,
+            //    Birthday = CharBirthday.May,
+            //    Deity = CharDeity.Nymeia,
+            //    Job = CharJob.Astrologian,
+            //    PhysicalDCName = "Primal",
+            //    LogicalDCName = "Excalibur"
+            //};
+
+            //Item ITEMDUMMY = new Item()
+            //{
+            //    Name = "TESTERITEMNAME"
+            //};
+
+            //CharacterData.AddCharToDb(DUMMY);
+            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
+            //CharacterData.RemoveItemFromChar(DUMMY, ITEMDUMMY);
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
@@ -101,6 +123,32 @@ namespace Empyreum
                     ResultLbl.Content = $"Results Found: {counter}";
                 }
             }
+        }
+
+        private void addCharBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(FirstName.Text) || string.IsNullOrEmpty(LastName.Text) || string.IsNullOrEmpty(Race.Text) || string.IsNullOrEmpty(Clan.Text) || string.IsNullOrEmpty(PhysicalDC.Text) || string.IsNullOrEmpty(LogicalDC.Text))
+            {
+                CharResultLbl.Content = "Enter info into all fields.";
+                return;
+            }
+
+            Character charToAdd = new Character()
+            {
+                FirstName = FirstName.Text,
+                LastName = LastName.Text,
+                Race = Race.Text,
+                Clan = Clan.Text,
+                Gender = (CharGender)(int)Gender.SelectedIndex,
+                Birthday = (CharBirthday)(int)Birthday.SelectedIndex,
+                Deity = (CharDeity)(int)Deity.SelectedIndex,
+                Job = (CharJob)(int)Job.SelectedIndex,
+                PhysicalDCName = PhysicalDC.Text,
+                LogicalDCName = LogicalDC.Text
+            };
+
+            this.viewModel.characters.Add(charToAdd);
+            CharacterData.AddCharToDb(charToAdd);
         }
     }
 }

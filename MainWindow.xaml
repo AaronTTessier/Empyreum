@@ -4,66 +4,137 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Empyreum"
+        xmlns:models="clr-namespace:Empyreum.Models"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="850">
     <Grid>
-        <TabControl x:Name="tabControl">
-            <TabItem Header="Home">
-                <Grid Background="#FFE5E5E5">
-                    <Label x:Name="appTitle" Content="Empyreum" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Margin="0,40,0,0"/>
-                    <Label x:Name="helperText" Content="Use the tabs in the top left to search for gear." HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,160,0,0"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Gear Search">
-                <Grid Background="#FFE5E5E5" AutomationProperties.HelpText="Test">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="175"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label x:Name="searchLabel" Content="Search for gear below" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="18"/>
-                    
-                    <!--SearchedItems Textbox-->
-                    <TextBox x:Name="searchTextBox" Grid.Column="0" Width="250" Height="35" FontSize="25" Margin="0,50,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" KeyDown="searchTextBox_KeyDown" VerticalContentAlignment="Center"/>
-                    
-                    <!--SearchedItems Datagrid-->
-                    <DataGrid x:Name="searchGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="15,120,10,20" ItemsSource="{Binding SearchedItems}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Left">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Width="55" Binding="{Binding ID}"/>
-                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    
-                    <!-- OwnedItems Datagrid-->
-                    <DataGrid x:Name="invGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OwnedItems}" SelectedItem="{Binding SelectedItem}" Margin="10,120,15,20" HorizontalAlignment="Right" Grid.Column="2">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Width="40" Binding="{Binding ID}"/>
-                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    
-                    <!--Stack Panel (Center Column)-->
-                    <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
-                        
-                        <!--Results Label-->
-                        <Label x:Name="ResultLbl" Content="" FontSize="18"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,50" HorizontalContentAlignment="Center"/>
-                        
-                        <!--Add Button-->
-                        <Button x:Name="addBtn" Content="Add >>" HorizontalAlignment="Center" Height="30" FontSize="20" VerticalAlignment="Center" Click="AddBtn_OnClick" Margin="0,0,0,10"/>
-                        
-                        <!--Remove Button-->
-                        <Button x:Name="removeBtn" Content="Remove &lt;&lt;" HorizontalAlignment="Center" Height="30" FontSize="20" Margin="0,0,0,0" Click="removeBtn_OnClick"/>
-                        
-                    </StackPanel>
-                </Grid>
-            </TabItem>
+        <ScrollViewer>
+            <TabControl x:Name="tabControl">
+                <TabItem Header="Home">
+                    <Grid Background="#FFE5E5E5">
+                        <Label x:Name="appTitle" Content="Empyreum" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Margin="0,40,0,0"/>
+                        <Label x:Name="helperText" Content="Use the tabs in the top left to search for gear." HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="0,160,0,0"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Gear Search">
+                    <Grid Background="#FFE5E5E5" AutomationProperties.HelpText="Test">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="searchLabel" Content="Search for gear below" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="18"/>
 
-            <TabItem Header="Character Search">
-                
-            </TabItem>
-        </TabControl>
+                        <!--SearchedItems Textbox-->
+                        <TextBox x:Name="searchTextBox" Grid.Column="0" Width="250" Height="35" FontSize="25" Margin="0,50,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" KeyDown="searchTextBox_KeyDown" VerticalContentAlignment="Center"/>
+
+                        <!--SearchedItems Datagrid-->
+                        <DataGrid x:Name="searchGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="15,120,10,20" ItemsSource="{Binding SearchedItems}" SelectedItem="{Binding SelectedItem}" HorizontalAlignment="Left">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Width="55" Binding="{Binding ID}"/>
+                                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!-- OwnedItems Datagrid-->
+                        <DataGrid x:Name="invGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ItemsSource="{Binding OwnedItems}" SelectedItem="{Binding SelectedItem}" Margin="10,120,15,20" HorizontalAlignment="Right" Grid.Column="2">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Width="40" Binding="{Binding ID}"/>
+                                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <!--Stack Panel (Center Column)-->
+                        <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
+
+                            <!--Results Label-->
+                            <Label x:Name="ResultLbl" Content="" FontSize="18"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,50" HorizontalContentAlignment="Center"/>
+
+                            <!--Add Button-->
+                            <Button x:Name="addBtn" Content="Add >>" HorizontalAlignment="Center" Height="30" FontSize="20" VerticalAlignment="Center" Click="AddBtn_OnClick" Margin="0,0,0,10"/>
+
+                            <!--Remove Button-->
+                            <Button x:Name="removeBtn" Content="Remove &lt;&lt;" HorizontalAlignment="Center" Height="30" FontSize="20" Margin="0,0,0,0" Click="removeBtn_OnClick"/>
+
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Character View">
+                    <Grid Background="#FFE5E5E5" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="175"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Character Creation Details -->
+
+                        <!-- First Name -->
+                        <Label Content="First Name" Grid.Column="0" Margin="10, 15, 0, 0" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="FirstName" Grid.Column="0" Width="270" Height="35" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"/>
+
+                        <!-- Last Name -->
+                        <Label Content="Last Name" Grid.Column="0" Margin="10, 90, 0, 0" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="LastName" Grid.Column="0" Width="270" Height="35" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 125, 0, 0"/>
+
+                        <!-- Race -->
+                        <Label Content="Race" Grid.Column="0" Margin="10, 165, 0, 0" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Race" Grid.Column="0" Width="270" Height="35" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 200, 0, 0"/>
+
+                        <!-- Clan -->
+                        <Label Content="Clan" Grid.Column="0" Margin="10, 240, 0, 0" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="Clan" Grid.Column="0" Width="270" Height="35" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 275, 0, 0"/>
+
+                        <!-- Gender -->
+                        <Label Content="Gender" Grid.Column="0" Margin="10, 315, 0, 0" Height="35" Width="125" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="Gender" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="35" FontSize="20" Margin="10, 350, 0, 0" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type models:CharGender}}}" SelectedIndex="0"/>
+
+                        <!-- Birthday -->
+                        <Label Content="Birthday" Grid.Column="0" Margin="155, 315, 0, 0" Height="35" Width="125" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="Birthday" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="35" FontSize="20" Margin="155, 350, 0, 0" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type models:CharBirthday}}}" SelectedIndex="0"/>
+
+                        <!-- Deity -->
+                        <Label Content="Deity" Grid.Column="0" Margin="10, 390, 0, 0" Height="35" Width="125" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="Deity" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="35" FontSize="20" Margin="10, 425, 0, 0" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type models:CharDeity}}}" SelectedIndex="0"/>
+
+                        <!-- Job -->
+                        <Label Content="Job" Grid.Column="0" Margin="155, 390, 0, 0" Height="35" Width="125" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="Job" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Height="35" FontSize="20" Margin="155, 425, 0, 0" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type models:CharJob}}}" SelectedIndex="0"/>
+
+                        <!-- Physical DC Name -->
+                        <Label Content="Physical Data Center" Grid.Column="0" Margin="10, 465, 0, 0" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="PhysicalDC" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Height="35" FontSize="20" Margin="10, 500, 0, 0"/>
+                        
+                        <!-- Logical DC Name -->
+                        <Label Content="Logical Data Center" Grid.Column="0" Margin="10, 540, 0, 0" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="LogicalDC" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Height="35" FontSize="20" Margin="10, 575, 0, 0"/>
+
+                        <!-- Stack Panel (Center Column)-->
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical">
+                            <Label x:Name="CharResultLbl" Content="" FontSize="18"  HorizontalAlignment="Center"  Margin="0,0,0,50" HorizontalContentAlignment="Center"/>
+                            <!--Add Button-->
+                            <Button x:Name="addCharBtn" Content="Add >>" HorizontalAlignment="Center" Height="30" FontSize="20" VerticalAlignment="Center" Click="addCharBtn_Click" Margin="0,0,0,10"/>
+
+                            <!--Remove Button-->
+                            <Button x:Name="removeCharBtn" Content="Remove" HorizontalAlignment="Center" Height="30" FontSize="20" Margin="0,0,0,0" Click="removeBtn_OnClick" Background="#FFB50000" Foreground="White" />
+                        </StackPanel>
+                        
+                        <!-- Character Datagrid -->
+                        <DataGrid x:Name="charGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="15,120,10,20" ItemsSource="{Binding characters}" SelectedItem="{Binding SelectedChar}" HorizontalAlignment="Left" Grid.Column="2">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Data Center" Width="85" Binding="{Binding PhysicalDCName}"/>
+                                <DataGridTextColumn Header="First Name" Width="*" Binding="{Binding FirstName}"/>
+                                <DataGridTextColumn Header="Last Name" Width="*" Binding="{Binding LastName}"/>
+                                <DataGridTextColumn Header="Species" Width="*" Binding="{Binding Race}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </ScrollViewer>
+        
         <Label Name="devLabel" Content="Aaron Tessier, 2024 - Full Sail University: Wearable Computing" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="25"/>
     </Grid>
 </Window>

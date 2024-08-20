@@ -1,4 +1,5 @@
 ﻿using Empyreum.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Empyreum.Data
         {
             using (var db = new ItemContext())
             {
-                db.Add(item);
+                db.Items.Add(item);
                 db.SaveChanges();
             }
         }
@@ -22,7 +23,7 @@ namespace Empyreum.Data
         {
             using (var db = new ItemContext())
             {
-                db.Remove(item);
+                db.Items.Remove(item);
                 db.SaveChanges();
             }
         }
