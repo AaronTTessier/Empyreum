@@ -1,12 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Empyreum.Models.Item;
-
-namespace Empyreum.Models
+﻿namespace Empyreum.Models
 {
     public class Item
     {
@@ -18,7 +10,7 @@ namespace Empyreum.Models
         public int ID { get; set; }
 
         // ID to be used for Sqlite
-        public int ItemServerId {  get; set; }
+        public int ItemServerId { get; set; }
 
         public int? CharID { get; set; }
 

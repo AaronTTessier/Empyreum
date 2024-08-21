@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Empyreum.ViewModel
 {
-    internal class MainWindowViewModel 
+    internal class MainWindowViewModel
     {
         public ObservableCollection<Item> OwnedItems { get; set; }
 
@@ -21,6 +21,6 @@ namespace Empyreum.ViewModel
 
         }
 
-        
+
     }
 }

@@ -1,24 +1,12 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Flurl;
-using Flurl.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net.Http;
-using Python.Runtime;
+﻿using Empyreum.Data;
 using Empyreum.Models;
 using Empyreum.ViewModel;
+using Flurl.Http;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-using System.Net.Http.Json;
-using Empyreum.Data;
+using System.Net.Http;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Empyreum
 {
@@ -105,7 +93,7 @@ namespace Empyreum
             {
                 ResultLbl.Content = "";
 
-                if(string.IsNullOrEmpty(searchTextBox.Text))
+                if (string.IsNullOrEmpty(searchTextBox.Text))
                 {
                     ResultLbl.Content = "No text entered.";
                 }

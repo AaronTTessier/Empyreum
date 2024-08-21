@@ -1,11 +1,4 @@
 ﻿using Empyreum.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Empyreum.Data
 {
@@ -13,7 +6,7 @@ namespace Empyreum.Data
     {
         public static void AddCharToDb(Character chara)
         {
-            using (var db = new ItemContext()) 
+            using (var db = new ItemContext())
             {
                 db.Characters.Add(chara);
                 db.SaveChanges();
