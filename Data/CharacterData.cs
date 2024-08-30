@@ -1,4 +1,5 @@
 ﻿using Empyreum.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Empyreum.Data
 {
@@ -17,7 +18,8 @@ namespace Empyreum.Data
         {
             using (var db = new ItemContext())
             {
-                db.Characters.Remove(chara);
+                var charToRemove = db.Characters.OrderBy(e =>e.Id).Include(e => e.CharItems).First();
+                db.Characters.Remove(charToRemove);
                 db.SaveChanges();
             }
         }

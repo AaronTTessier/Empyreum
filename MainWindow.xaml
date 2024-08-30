@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Empyreum"
         xmlns:models="clr-namespace:Empyreum.Models"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="850">
+        Title="MainWindow" Height="700" Width="850" ResizeMode="CanMinimize">
     <Grid>
         <TabControl x:Name="tabControl">
             <TabItem Header="Home">
@@ -124,8 +124,8 @@
                             <TextBox x:Name="PhysicalDC" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Height="35" FontSize="20" Margin="10"/>
 
                             <!-- Logical DC Name -->
-                            <Label Content="Logical Data Center" Grid.Column="0" Margin="10, 10" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <TextBox x:Name="LogicalDC" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Height="35" FontSize="20" Margin="10,0,0,35"/>
+                            <Label Content="Logical Data Center" Grid.Column="0" Margin="10, 10" Height="35" Width="270" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+                            <TextBox x:Name="LogicalDC" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Height="35" FontSize="20" Margin="10,5,0,35"/>
                         </StackPanel>
                     </ScrollViewer>
                     
@@ -133,12 +133,11 @@
 
                     <!-- Stack Panel (Center Column)-->
                     <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical">
-                        <Label x:Name="CharResultLbl" Content="" FontSize="18"  HorizontalAlignment="Center"  Margin="0,0,0,50" HorizontalContentAlignment="Center"/>
                         <!--Add Button-->
                         <Button x:Name="addCharBtn" Content="Add >>" HorizontalAlignment="Center" Height="30" FontSize="20" VerticalAlignment="Center" Click="addCharBtn_Click" Margin="0,0,0,10"/>
 
                         <!--Remove Button-->
-                        <Button x:Name="removeCharBtn" Content="Remove" HorizontalAlignment="Center" Height="30" FontSize="20" Margin="0,0,0,0" Click="removeBtn_OnClick" Background="#FFB50000" Foreground="White" />
+                        <Button x:Name="removeCharBtn" Content="Remove" HorizontalAlignment="Center" Height="30" FontSize="20" Margin="0,0,0,0" Click="removeCharBtn_Click" Background="#FFB50000" Foreground="White"/>
                     </StackPanel>
 
                     <!-- Character Datagrid -->

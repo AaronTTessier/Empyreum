@@ -43,10 +43,17 @@ namespace Empyreum
             //{
             //    Name = "TESTERITEMNAME"
             //};
+            //Item ITEMDUMMYB = new Item()
+            //{
+            //    Name = "TESTERITEMNAME"
+            //};
 
             //CharacterData.AddCharToDb(DUMMY);
             //CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
             //CharacterData.RemoveItemFromChar(DUMMY, ITEMDUMMY);
+            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
+            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
+            //CharacterData.RemoveCharFromDb(DUMMY);
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
@@ -71,6 +78,7 @@ namespace Empyreum
         {
             if (this.viewModel.SelectedItem == null)
             {
+                MessageBox.Show("Please select an item to delete.", "Item Deletion Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (this.viewModel.SearchedItems.Contains(this.viewModel.SelectedItem))
@@ -117,7 +125,7 @@ namespace Empyreum
         {
             if (string.IsNullOrEmpty(FirstName.Text) || string.IsNullOrEmpty(LastName.Text) || string.IsNullOrEmpty(Race.Text) || string.IsNullOrEmpty(Clan.Text) || string.IsNullOrEmpty(PhysicalDC.Text) || string.IsNullOrEmpty(LogicalDC.Text))
             {
-                CharResultLbl.Content = "Enter info into all fields.";
+                MessageBox.Show("Error: Make sure all Character fields have valid information.", "Character Add Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -137,6 +145,19 @@ namespace Empyreum
 
             this.viewModel.characters.Add(charToAdd);
             CharacterData.AddCharToDb(charToAdd);
+        }
+
+        private void removeCharBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.viewModel.SelectedChar == null)
+            {
+                MessageBox.Show("Please select a Character to delete.", "Character Deletion Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+
+            Character selectedChar = this.viewModel.SelectedChar;
+            this.viewModel.characters.Remove(selectedChar);
+            CharacterData.RemoveCharFromDb(selectedChar);
         }
     }
 }
