@@ -1,5 +1,6 @@
 ﻿using Empyreum.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Windows.Controls.Primitives;
 
 namespace Empyreum.Data
 {
@@ -38,8 +39,15 @@ namespace Empyreum.Data
         {
             using (var db = new ItemContext())
             {
-                var change = db.Items.Single(e => e.CharID == chara.Id);
-                change.CharID = null;
+                // COMPLETE: Fix the query in RemoveItemFromChar; should return only one item at a time to remove.
+                var change = db.Characters.Include(ch => ch.CharItems).SingleOrDefault(c => c.Id == chara.Id);
+                foreach(Item itemCheck in change.CharItems.ToList())
+                {
+                    if(itemCheck.Name == item.Name)
+                    {
+                        change.CharItems.Remove(itemCheck);
+                    }
+                }
                 db.SaveChanges();
             }
         }

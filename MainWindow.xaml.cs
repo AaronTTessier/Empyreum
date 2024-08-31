@@ -25,35 +25,35 @@ namespace Empyreum
             viewModel.characters = new ObservableCollection<Character>(CharacterData.GetCharacters());
 
             this.DataContext = viewModel;
-            //Character DUMMY = new Character()
-            //{
-            //    FirstName = "ABC",
-            //    LastName = "TEST",
-            //    Race = "Hrothgar",
-            //    Clan = "The Lost",
-            //    Gender = CharGender.Female,
-            //    Birthday = CharBirthday.May,
-            //    Deity = CharDeity.Nymeia,
-            //    Job = CharJob.Astrologian,
-            //    PhysicalDCName = "Primal",
-            //    LogicalDCName = "Excalibur"
-            //};
+            Character DUMMY = new Character()
+            {
+                FirstName = "ABC",
+                LastName = "TEST",
+                Race = "Hrothgar",
+                Clan = "The Lost",
+                Gender = CharGender.Female,
+                Birthday = CharBirthday.May,
+                Deity = CharDeity.Nymeia,
+                Job = CharJob.Astrologian,
+                PhysicalDCName = "Primal",
+                LogicalDCName = "Excalibur"
+            };
 
-            //Item ITEMDUMMY = new Item()
-            //{
-            //    Name = "TESTERITEMNAME"
-            //};
-            //Item ITEMDUMMYB = new Item()
-            //{
-            //    Name = "TESTERITEMNAME"
-            //};
+            Item ITEMDUMMY = new Item()
+            {
+                Name = "TESTERITEMNAME"
+            };
+            Item ITEMDUMMYB = new Item()
+            {
+                Name = "TESTERITEMNAME_B"
+            };
 
-            //CharacterData.AddCharToDb(DUMMY);
-            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
-            //CharacterData.RemoveItemFromChar(DUMMY, ITEMDUMMY);
-            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
-            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
-            //CharacterData.RemoveCharFromDb(DUMMY);
+            CharacterData.AddCharToDb(DUMMY);
+            CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
+            CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
+            CharacterData.RemoveItemFromChar(DUMMY, ITEMDUMMYB);
+            CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
+            CharacterData.RemoveCharFromDb(DUMMY);
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
