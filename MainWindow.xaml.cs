@@ -21,42 +21,12 @@ namespace Empyreum
             InitializeComponent();
             this.viewModel = new MainWindowViewModel();
             viewModel.SearchedItems = new ObservableCollection<Item>();
-            viewModel.OwnedItems = new ObservableCollection<Item>(ItemData.GetItems());
+            viewModel.OwnedItems = new ObservableCollection<Item>();
             viewModel.characters = new ObservableCollection<Character>(CharacterData.GetCharacters());
             viewModel.OwnedCharItems = new ObservableCollection<Item>();
             viewModel.BufferItemList = new List<Item>();
 
             this.DataContext = viewModel;
-
-            //Character DUMMY = new Character()
-            //{
-            //    FirstName = "ABC",
-            //    LastName = "TEST",
-            //    Race = "Hrothgar",
-            //    Clan = "The Lost",
-            //    Gender = CharGender.Female,
-            //    Birthday = CharBirthday.May,
-            //    Deity = CharDeity.Nymeia,
-            //    Job = CharJob.Astrologian,
-            //    PhysicalDCName = "Primal",
-            //    LogicalDCName = "Excalibur"
-            //};
-
-            //Item ITEMDUMMY = new Item()
-            //{
-            //    Name = "TESTERITEMNAME"
-            //};
-            //Item ITEMDUMMYB = new Item()
-            //{
-            //    Name = "TESTERITEMNAME_B"
-            //};
-
-            //CharacterData.AddCharToDb(DUMMY);
-            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
-            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
-            //CharacterData.RemoveItemFromChar(DUMMY, ITEMDUMMYB);
-            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
-            //CharacterData.RemoveCharFromDb(DUMMY);
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
@@ -191,7 +161,7 @@ namespace Empyreum
 
             CharacterData.RemoveItemFromChar((Character)CharacterCmbBx.SelectedItem, viewModel.SelectedOwnedItem);
             ItemData.RemoveItemFromDb(viewModel.SelectedOwnedItem);
-            //this.viewModel.OwnedItems.Add(viewModel.SelectedOwnedItem);
+            this.viewModel.OwnedItems.Remove(viewModel.SelectedOwnedItem);
             this.viewModel.OwnedCharItems.Remove(viewModel.SelectedOwnedItem);
         }
 
