@@ -23,37 +23,40 @@ namespace Empyreum
             viewModel.SearchedItems = new ObservableCollection<Item>();
             viewModel.OwnedItems = new ObservableCollection<Item>(ItemData.GetItems());
             viewModel.characters = new ObservableCollection<Character>(CharacterData.GetCharacters());
+            viewModel.OwnedCharItems = new ObservableCollection<Item>();
+            viewModel.BufferItemList = new List<Item>();
 
             this.DataContext = viewModel;
-            Character DUMMY = new Character()
-            {
-                FirstName = "ABC",
-                LastName = "TEST",
-                Race = "Hrothgar",
-                Clan = "The Lost",
-                Gender = CharGender.Female,
-                Birthday = CharBirthday.May,
-                Deity = CharDeity.Nymeia,
-                Job = CharJob.Astrologian,
-                PhysicalDCName = "Primal",
-                LogicalDCName = "Excalibur"
-            };
 
-            Item ITEMDUMMY = new Item()
-            {
-                Name = "TESTERITEMNAME"
-            };
-            Item ITEMDUMMYB = new Item()
-            {
-                Name = "TESTERITEMNAME_B"
-            };
+            //Character DUMMY = new Character()
+            //{
+            //    FirstName = "ABC",
+            //    LastName = "TEST",
+            //    Race = "Hrothgar",
+            //    Clan = "The Lost",
+            //    Gender = CharGender.Female,
+            //    Birthday = CharBirthday.May,
+            //    Deity = CharDeity.Nymeia,
+            //    Job = CharJob.Astrologian,
+            //    PhysicalDCName = "Primal",
+            //    LogicalDCName = "Excalibur"
+            //};
 
-            CharacterData.AddCharToDb(DUMMY);
-            CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
-            CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
-            CharacterData.RemoveItemFromChar(DUMMY, ITEMDUMMYB);
-            CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
-            CharacterData.RemoveCharFromDb(DUMMY);
+            //Item ITEMDUMMY = new Item()
+            //{
+            //    Name = "TESTERITEMNAME"
+            //};
+            //Item ITEMDUMMYB = new Item()
+            //{
+            //    Name = "TESTERITEMNAME_B"
+            //};
+
+            //CharacterData.AddCharToDb(DUMMY);
+            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMY);
+            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
+            //CharacterData.RemoveItemFromChar(DUMMY, ITEMDUMMYB);
+            //CharacterData.AddItemToChar(DUMMY, ITEMDUMMYB);
+            //CharacterData.RemoveCharFromDb(DUMMY);
         }
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
@@ -158,6 +161,49 @@ namespace Empyreum
             Character selectedChar = this.viewModel.SelectedChar;
             this.viewModel.characters.Remove(selectedChar);
             CharacterData.RemoveCharFromDb(selectedChar);
+        }
+
+        private void addItemToCharBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.viewModel.SelectedOwnedItem == null)
+            {
+                MessageBox.Show("Please select an item to add to character.", "Item Ownership Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (this.viewModel.OwnedCharItems.Contains(this.viewModel.SelectedOwnedItem))
+            {
+                MessageBox.Show("This item already is owned by this character.", "Item Ownership Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            this.viewModel.OwnedCharItems.Add(viewModel.SelectedOwnedItem);
+            CharacterData.AddItemToChar((Character)CharacterCmbBx.SelectedItem, viewModel.SelectedOwnedItem);
+            this.viewModel.OwnedItems.Remove(viewModel.SelectedOwnedItem);
+        }
+
+        private void removeItemFromCharBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.viewModel.SelectedOwnedItem == null)
+            {
+                MessageBox.Show("Please select an item to remove from this character.", "Item Deletion Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            CharacterData.RemoveItemFromChar((Character)CharacterCmbBx.SelectedItem, viewModel.SelectedOwnedItem);
+            ItemData.RemoveItemFromDb(viewModel.SelectedOwnedItem);
+            //this.viewModel.OwnedItems.Add(viewModel.SelectedOwnedItem);
+            this.viewModel.OwnedCharItems.Remove(viewModel.SelectedOwnedItem);
+        }
+
+        private void OnCharSelectChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            this.viewModel.OwnedCharItems.Clear();
+            //this.viewModel.BufferItemList.AddRange(CharacterData.GetCharacterItems((Character)CharacterCmbBx.SelectedItem));
+            foreach(Item item in CharacterData.GetCharacterItems((Character)CharacterCmbBx.SelectedItem))
+            {
+                this.viewModel.OwnedCharItems.Add(item);
+            }
+            
         }
     }
 }

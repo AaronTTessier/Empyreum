@@ -59,5 +59,14 @@ namespace Empyreum.Data
                 return db.Characters.ToList();
             }
         }
+
+        public static List<Item> GetCharacterItems(Character chara)
+        {
+            using (var db = new ItemContext())
+            {
+                var itemsToGet = db.Characters.Include(e => e.CharItems).SingleOrDefault(c => c.Id == chara.Id);
+                return itemsToGet.CharItems.ToList();
+            }
+        }
     }
 }

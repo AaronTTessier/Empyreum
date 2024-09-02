@@ -151,6 +151,63 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+            
+            <!-- Armoury Tab -->
+            <TabItem Header="Armoury">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="175"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="searchSetLabel" Content="Choose gear below" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,25,0,0" FontSize="18"/>
+
+                    <!--Owned Items Datagrid-->
+                    <DataGrid x:Name="ownedItemsArmouryDGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="15,100,10,20" ItemsSource="{Binding OwnedItems}" SelectedItem="{Binding SelectedOwnedItem}" HorizontalAlignment="Left">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="55" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <!-- Stack Panel (Center Column)-->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical">
+                        <!--Add Button-->
+                        <Button x:Name="addItemToCharBtn" Content="Add >>" HorizontalAlignment="Center" Height="30" FontSize="20" VerticalAlignment="Center" Click="addItemToCharBtn_Click" Margin="0,0,0,10"/>
+
+                        <!--Remove Button-->
+                        <Button x:Name="removeItemFromCharBtn" Content="Remove" HorizontalAlignment="Center" Height="30" FontSize="20" Margin="0,0,0,0" Click="removeItemFromCharBtn_Click" Background="#FFB50000" Foreground="White"/>
+                    </StackPanel>
+
+                    <Label x:Name="ownedSetLabel" Content="Select Character below" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,25,0,0" FontSize="18" Grid.Column="2"/>
+
+                    <ComboBox x:Name="CharacterCmbBx" Grid.Column="2" Width="309.5" Height="35" Margin="0, 100, 0, 0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" ItemsSource="{Binding characters}" SelectionChanged="OnCharSelectChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="FirstName"/>
+                                            <Binding Path="LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                        
+                    </ComboBox>
+
+                    <!-- Character Owned Items Datagrid -->
+                    <DataGrid x:Name="charOwnedItemsDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" Margin="15, 175, 10, 20" ItemsSource="{Binding OwnedCharItems}" SelectedItem="{Binding SelectedOwnedItem}" HorizontalAlignment="Right" Grid.Column="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="55" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
         </TabControl>
         <Label Name="devLabel" Content="Aaron Tessier, 2024 - Full Sail University: Wearable Computing" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="25"/>
     </Grid>
