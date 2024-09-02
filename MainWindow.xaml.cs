@@ -21,7 +21,7 @@ namespace Empyreum
             InitializeComponent();
             this.viewModel = new MainWindowViewModel();
             viewModel.SearchedItems = new ObservableCollection<Item>();
-            viewModel.OwnedItems = new ObservableCollection<Item>();
+            viewModel.OwnedItems = new ObservableCollection<Item>(ItemData.GetItems());
             viewModel.characters = new ObservableCollection<Character>(CharacterData.GetCharacters());
             viewModel.OwnedCharItems = new ObservableCollection<Item>();
             viewModel.BufferItemList = new List<Item>();

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Empyreum"
         xmlns:models="clr-namespace:Empyreum.Models"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="850" ResizeMode="CanMinimize">
+        Title="Empyreum" Height="700" Width="850" ResizeMode="CanMinimize">
     <Grid>
         <TabControl x:Name="tabControl">
             <TabItem Header="Home">
